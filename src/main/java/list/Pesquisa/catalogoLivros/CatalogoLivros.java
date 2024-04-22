@@ -1,8 +1,7 @@
-package main.java.list.Pesquisa;
+package main.java.list.Pesquisa.catalogoLivros;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CatalogoLivros implements Iterable<Livro> {
     List<Livro> livroList;

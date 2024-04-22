@@ -1,4 +1,4 @@
-package main.java.list.Pesquisa;
+package main.java.list.Pesquisa.catalogoLivros;
 
 public class Livro {
     private String autor;

@@ -11,7 +11,15 @@ public class AgendaEventos {
     public AgendaEventos() {
         this.agendaEventos = new HashMap<>();
     }
-    public void adicionarEvento(LocalDate data,String nome,String atracao, int duracaoMinutos){
+
+    @Override
+    public String toString() {
+        return "AgendaEventos{" +
+                "agendaEventos=" + agendaEventos +
+                '}';
+    }
+
+    public void adicionarEvento(LocalDate data, String nome, String atracao, int duracaoMinutos){
         agendaEventos.put(data,new Evento(nome,atracao,duracaoMinutos));
     }
     public Map<LocalDate,Evento> exibirAgenda(){
@@ -23,9 +31,30 @@ public class AgendaEventos {
         }
 
     }
+    public Map<LocalDate, Evento> obterProximoEvento(){
+        Map<LocalDate,Evento> proximoEvento = new HashMap<>();
+        Map<LocalDate,Evento> agendaEmOrdem = new TreeMap<>(agendaEventos);
+        LocalDate dataAtual = LocalDate.now();
+        for (Map.Entry<LocalDate, Evento> entry : agendaEventos.entrySet()){
+            if (entry.getKey().isEqual(dataAtual) || entry.getKey().isAfter(dataAtual)){
+                proximoEvento.put(entry.getKey(),entry.getValue());
+                break;
+            }
+        }
+        return proximoEvento;
+
+    }
 
     public static void main(String[] args) {
         AgendaEventos agendaEventos = new AgendaEventos();
-        agendaEventos.adicionarEvento(LocalDate.of(2024,07,04),"New Job","Work",360);
+        agendaEventos.adicionarEvento(LocalDate.of(2024,07,04),"Promotio Job","Work",360);
+        agendaEventos.adicionarEvento(LocalDate.of(2024,05,01),"New Job","Work",360);
+        agendaEventos.adicionarEvento(LocalDate.of(2025,05,01),"New Promotion Job","Work",360);
+
+        System.out.println("Exibe agenda:");
+        System.out.println(agendaEventos.exibirAgenda());
+
+        System.out.println("Mostra proximo evento:");
+        System.out.println(agendaEventos.obterProximoEvento());
     }
 }

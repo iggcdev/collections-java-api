@@ -1,6 +1,8 @@
-package main.java.list.OperacoesBasicas;
+package main.java.list.OperacoesBasicas.carrinhosCompras;
 
-public class Item {
+import java.util.Comparator;
+
+public class Item implements Comparable<Item> {
     private  String nome;
     private  int quantidade;
     private double preco;
@@ -9,6 +11,11 @@ public class Item {
         this.nome = nome;
         this.quantidade = quantidade;
         this.preco = preco;
+    }
+
+    @Override
+    public int compareTo(Item i) {
+        return this.nome.compareToIgnoreCase(i.getNome());
     }
 
     public String getNome() {
@@ -40,5 +47,17 @@ public class Item {
         return  nome +
                 ", quantidade: " + quantidade +
                 ", preco: " + preco+"\n";
+    }
+}
+class ComparatorPorQuantidade implements Comparator<Item>{
+    @Override
+    public int compare(Item i1, Item i2) {
+        return Integer.compare(i1.getQuantidade(), i2.getQuantidade());
+    }
+}
+class ComparatorPorPreco implements Comparator<Item>{
+    @Override
+    public int compare(Item i1, Item i2) {
+        return Double.compare(i1.getPreco(), i2.getPreco());
     }
 }
