@@ -14,17 +14,17 @@ public class Pessoa implements Comparable<Pessoa>{
     }
 
     @Override
+    public int compareTo(Pessoa p) {
+        return Integer.compare(idade,p.getIdade());
+    }
+
+    @Override
     public String toString() {
         return String.format("| %-15s | %-5s | %-6s |\n",nome, idade, altura);
     }
 
 
 
-
-    @Override
-    public int compareTo(Pessoa p) {
-        return Integer.compare(idade,p.getIdade());
-    }
 
     public String getNome() {
         return nome;
